@@ -19,6 +19,10 @@ function loadOptions() {
      var $tasks = $("#tasks");
 
     if (localStorage.taskNames) {
+        // TODO: 
+        
+        // convert from string to array
+        // loop and append to tasks
         $tasks = localStorage.taskNames;
     }
 }
