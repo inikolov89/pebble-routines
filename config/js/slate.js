@@ -290,11 +290,11 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
         $list.append($addButton);
 
         $addButton.click(function() {
-          var $inbox = $('<div class="item">'
+          var $inbox = $('<label class="item">'
                         + '<div class="item-input-wrapper">'
                           + '<input class="item-input" type="text" name="focus-box">'
                         + '</div>'
-                      + '</div>');
+                      + '</label>');
 
           $inbox.insertBefore($list.children().last());
 
