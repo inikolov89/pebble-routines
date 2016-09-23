@@ -17,7 +17,7 @@ function submitHandler() {
 
 function loadOptions() {
     var $tasks = $("#tasks");
-
+    
     if (localStorage.taskNames) {
         let taskNames = JSON.parse(localStorage.taskNames);
         taskNames.forEach(function (task) {
@@ -34,7 +34,6 @@ function getAndStoreConfigData() {
     $tasks.children('label').each(function () {
         taskNames.push($(this).text());
     });
-
 
     var options = {
         taskNames: taskNames
