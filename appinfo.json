@@ -1,0 +1,57 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "inikolov89@gmail.com",
+    "longName": "MyRoutines",
+    "projectType": "pebblejs",
+    "resources": {
+        "media": [
+            {
+                "file": "images/menu_icon.png",
+                "menuIcon": true,
+                "name": "IMAGE_MENU_ICON",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/logo_splash.png",
+                "name": "IMAGE_LOGO_SPLASH",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/tile_splash.png",
+                "name": "IMAGE_TILE_SPLASH",
+                "type": "bitmap"
+            },
+            {
+                "file": "fonts/UbuntuMono-Regular.ttf",
+                "name": "MONO_FONT_14",
+                "type": "font"
+            },
+            {
+                "file": "images/done.png",
+                "name": "IMAGES_DONE_PNG",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/task.png",
+                "name": "IMAGES_TASK_PNG",
+                "type": "bitmap"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "MyRoutines",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "38384223-da47-483a-a2da-37974e1a902d",
+    "versionCode": 1,
+    "versionLabel": "0.1",
+    "watchapp": {
+        "hiddenApp": false,
+        "watchface": false
+    }
+}
