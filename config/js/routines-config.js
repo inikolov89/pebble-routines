@@ -16,14 +16,14 @@ function submitHandler() {
 }
 
 function loadOptions() {
-     var $tasks = $("#tasks");
+    var $tasks = $("#tasks");
 
     if (localStorage.taskNames) {
-        // TODO: 
-        
-        // convert from string to array
-        // loop and append to tasks
-        $tasks = localStorage.taskNames;
+        let taskNames = JSON.parse(localStorage.taskNames);
+        taskNames.forEach(function (task) {
+            $tasks.append('<label class="item">' + task + '</label>')
+        }, this);
+
     }
 }
 
@@ -31,16 +31,17 @@ function getAndStoreConfigData() {
     var $tasks = $("#tasks");
 
     var taskNames = [];
-    $tasks.each(function () {
+    $tasks.children('label').each(function () {
         taskNames.push($(this).text());
     });
 
 
     var options = {
-         taskNames: taskNames
+        taskNames: taskNames
     };
 
-    localStorage.taskNames = options.taskNames;
+    // store for next time
+    localStorage.taskNames = JSON.stringify(options.taskNames);
 
     console.log('Got options: ' + JSON.stringify(options));
     return options;
