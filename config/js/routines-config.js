@@ -10,14 +10,13 @@ function submitHandler() {
         console.log('Submit');
 
         var return_to = getQueryParam('return_to', 'pebblejs://close#');
-        // location.href = return_to + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
-        location.href = return_to + encodeURIComponent('test');
+        location.href = return_to + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
     });
 }
 
 function loadOptions() {
     var $tasks = $("#tasks");
-    
+
     if (localStorage.taskNames) {
         let taskNames = JSON.parse(localStorage.taskNames);
         taskNames.forEach(function (task) {
