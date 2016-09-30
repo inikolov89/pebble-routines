@@ -10,7 +10,7 @@ function submitHandler() {
         console.log('Submit');
 
         // var return_to = getQueryParam('return_to', 'pebblejs://close#');
-        document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
+        location.href = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
     });
 }
 
