@@ -23,12 +23,14 @@ function loadOptions() {
         taskNames.forEach(function (task) {
             $tasks.append('<label class="item">' + task + '</label>')
         }, this);
-
     }
+
 }
 
 function getAndStoreConfigData() {
     var $tasks = $("#tasks");
+    var $date = $('#date');
+    var $time = $('#time');
 
     var taskNames = [];
     $tasks.children('label').each(function () {
@@ -36,7 +38,9 @@ function getAndStoreConfigData() {
     });
 
     var options = {
-        taskNames: taskNames
+        taskNames: taskNames,
+        date: $date.val(),
+        time: $time.val(),
     };
 
     // store for next time
