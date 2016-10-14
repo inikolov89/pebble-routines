@@ -10,7 +10,6 @@
         "media": [
             {
                 "file": "images/menu_icon.png",
-                "menuIcon": true,
                 "name": "IMAGE_MENU_ICON",
                 "type": "bitmap"
             },
@@ -30,13 +29,14 @@
                 "type": "font"
             },
             {
-                "file": "images/done.png",
-                "name": "IMAGES_DONE_PNG",
+                "file": "images/task.png",
+                "menuIcon": true,
+                "name": "IMAGES_TASK_PNG",
                 "type": "bitmap"
             },
             {
-                "file": "images/task.png",
-                "name": "IMAGES_TASK_PNG",
+                "file": "images/done.png",
+                "name": "IMAGES_DONE_PNG",
                 "type": "bitmap"
             }
         ]

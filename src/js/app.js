@@ -8,17 +8,15 @@ var UI = require('ui');
 var Settings = require('settings');
 var tasks = [];
 
-
-// Set a configurable with just the close callback
+// ---------------
+// --- READ CONFIG DATA ---
+// ---------------
 Settings.config(
   { url: 'http://inikolov.info/pebble-routines/config/' },
   function (e) {
     var dict = {};
 
     console.log('closed configurable');
-
-    // Show the parsed response
-    console.log(JSON.stringify(e.options));
 
     if (e.options.tasks) {
       tasks = e.options.tasks;
@@ -27,53 +25,23 @@ Settings.config(
   }
 );
 
-
-// Pebble.addEventListener('ready', function() {
-//   console.log('PebbleKit JS ready!');
-// });
-
-// Pebble.addEventListener('showConfiguration', function() {
-//   var url = 'http://inikolov.info/pebble-routines/config/';
-
-//   console.log('Showing configuration page: ' + url);
-
-//   Pebble.openURL(url);
-// });
-
-// Pebble.addEventListener('webviewclosed', function(e) {
-//   var configData = JSON.parse(decodeURIComponent(e.response));
-
-//   console.log('Configuration page returned: ' + JSON.stringify(configData));
-
-//   var dict = {};
-
-//   if (configData.tasks) {
-//     dict.tasks = configData.tasks;
-//   }
-
-//   // Send to watchapp
-//   Pebble.sendAppMessage(dict, function() {
-//     console.log('Send successful: ' + JSON.stringify(dict));
-//   }, function() {
-//     console.log('Send failed!');
-//   });
-// });
+// ---------------
+// --- Peristence Layer ---
+// ---------------
 
 
 
-// some mock data
-var demoRoutine = ["get up", "clean your face", "brush your teeth", "survive"];
-
+// ---------------
 // --- HELPERS ---
 // ---------------
 
 var getTasks = function () {
   var menuTasks = [];
-
-  dict.tasks.forEach(function (taskName) {
+  var tasks = Settings.option('taskNames');
+  tasks.forEach(function (taskName) {
     menuTasks.push({
       title: taskName,
-      //subtitle: 'Some subtitle',
+      is_done: 0,
       icon: 'images/task.png'
     });
   });
@@ -81,8 +49,10 @@ var getTasks = function () {
   return menuTasks;
 };
 
-// ---------------
 
+// ---------------
+// --- UI ---
+// ---------------
 var menu = new UI.Menu({
   backgroundColor: 'white',
   textColor: 'black',
@@ -97,14 +67,39 @@ var menu = new UI.Menu({
 // show our list
 menu.show();
 
+
+// ---------------
+// --- CONTROLLER ---
+// ---------------
 menu.on('select', function (event) {
+  var currentItem =  menu.item(event.sectionIndex, event.itemIndex);
+  var doneStatus = 1;
+  var image = "images/done.png";
+  
+  if (currentItem.is_done == 1) {
+   doneStatus = 0;
+   image = 'images/task.png';
+  }
   menu.item(event.sectionIndex, event.itemIndex,
     {
       title: event.item.title,
-      icon: "images/done.png",
+      icon: image,
+      is_done: doneStatus,
       data: event.item.data,
       position: event.item.position
     });
+    console.log("check if done");
+  var tasksDone = 0;
+  var tasksList = menu.items(event.sectionIndex);
+  tasksList.forEach(function (task) {
+    tasksDone += task.is_done;
+  });
+  if (tasksDone == tasksList.length) {
+    var appDetails = new UI.Card({
+      title: "well done!",
+    });
+    appDetails.show();
+  }
 });
 
 
