@@ -26,7 +26,7 @@ Settings.config(
 );
 
 // ---------------
-// --- Peristence Layer ---
+// --- Persistence Layer ---
 // ---------------
 
 
