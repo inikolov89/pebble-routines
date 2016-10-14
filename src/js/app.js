@@ -72,13 +72,13 @@ menu.show();
 // --- CONTROLLER ---
 // ---------------
 menu.on('select', function (event) {
-  var currentItem =  menu.item(event.sectionIndex, event.itemIndex);
+  var currentItem = menu.item(event.sectionIndex, event.itemIndex);
   var doneStatus = 1;
   var image = "images/done.png";
-  
+
   if (currentItem.is_done == 1) {
-   doneStatus = 0;
-   image = 'images/task.png';
+    doneStatus = 0;
+    image = 'images/task.png';
   }
   menu.item(event.sectionIndex, event.itemIndex,
     {
@@ -88,7 +88,7 @@ menu.on('select', function (event) {
       data: event.item.data,
       position: event.item.position
     });
-    console.log("check if done");
+  console.log("check if done");
   var tasksDone = 0;
   var tasksList = menu.items(event.sectionIndex);
   tasksList.forEach(function (task) {
