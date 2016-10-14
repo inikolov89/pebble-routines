@@ -9,7 +9,7 @@ var Settings = require('settings');
 var tasks = [];
 
 // ---------------
-// --- READ CONFIG DATA ---
+// --- READ CONFIG DATA ----
 // ---------------
 Settings.config(
   { url: 'http://inikolov.info/pebble-routines/config/' },
