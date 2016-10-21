@@ -6,7 +6,10 @@
 
 var UI = require('ui');
 var Settings = require('settings');
+var Wakeup = require('wakeup');
+
 var tasks = [];
+var days = [];
 
 // ---------------
 // --- READ CONFIG DATA ---
@@ -20,6 +23,9 @@ Settings.config(
 
     if (e.options.tasks) {
       tasks = e.options.tasks;
+    }
+    if (e.options.selectedDays) {
+      days = e.options.selectedDays;
     }
 
   }
@@ -49,6 +55,22 @@ var getTasks = function () {
   return menuTasks;
 };
 
+// Wakeup.schedule(
+//   {
+//     // Set the wakeup event for one minute from now
+//     time: Date.now() / 1000 + 60,
+//     // Pass data for the app on launch
+//     data: { hello: 'world' }
+//   },
+//   function (e) {
+//     if (e.failed) {
+//       // Log the error reason
+//       console.log('Wakeup set failed: ' + e.error);
+//     } else {
+//       console.log('Wakeup set! Event ID: ' + e.id);
+//     }
+//   }
+// );
 
 // ---------------
 // --- UI ---

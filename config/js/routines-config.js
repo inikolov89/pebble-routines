@@ -18,7 +18,6 @@ function loadOptions() {
     var $tasks = $("#tasks");
     var $date = $('#date');
     var $time = $('#time');
-    var $days = $('#days');
 
     if (localStorage.taskNames) {
         let taskNames = JSON.parse(localStorage.taskNames);
