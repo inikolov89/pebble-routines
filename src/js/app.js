@@ -6,10 +6,7 @@
 
 var UI = require('ui');
 var Settings = require('settings');
-var Wakeup = require('wakeup');
-
 var tasks = [];
-var days = [];
 
 // ---------------
 // --- READ CONFIG DATA ---
@@ -24,15 +21,12 @@ Settings.config(
     if (e.options.tasks) {
       tasks = e.options.tasks;
     }
-    if (e.options.selectedDays) {
-      days = e.options.selectedDays;
-    }
 
   }
 );
 
 // ---------------
-// --- Persistence Layer ---
+// --- Peristence Layer ---
 // ---------------
 
 
@@ -55,22 +49,6 @@ var getTasks = function () {
   return menuTasks;
 };
 
-// Wakeup.schedule(
-//   {
-//     // Set the wakeup event for one minute from now
-//     time: Date.now() / 1000 + 60,
-//     // Pass data for the app on launch
-//     data: { hello: 'world' }
-//   },
-//   function (e) {
-//     if (e.failed) {
-//       // Log the error reason
-//       console.log('Wakeup set failed: ' + e.error);
-//     } else {
-//       console.log('Wakeup set! Event ID: ' + e.id);
-//     }
-//   }
-// );
 
 // ---------------
 // --- UI ---
@@ -94,13 +72,13 @@ menu.show();
 // --- CONTROLLER ---
 // ---------------
 menu.on('select', function (event) {
-  var currentItem = menu.item(event.sectionIndex, event.itemIndex);
+  var currentItem =  menu.item(event.sectionIndex, event.itemIndex);
   var doneStatus = 1;
   var image = "images/done.png";
-
+  
   if (currentItem.is_done == 1) {
-    doneStatus = 0;
-    image = 'images/task.png';
+   doneStatus = 0;
+   image = 'images/task.png';
   }
   menu.item(event.sectionIndex, event.itemIndex,
     {
@@ -110,7 +88,7 @@ menu.on('select', function (event) {
       data: event.item.data,
       position: event.item.position
     });
-  console.log("check if done");
+    console.log("check if done");
   var tasksDone = 0;
   var tasksList = menu.items(event.sectionIndex);
   tasksList.forEach(function (task) {
