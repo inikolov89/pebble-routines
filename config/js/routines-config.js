@@ -40,6 +40,7 @@ function loadOptions() {
 
 function getAndStoreConfigData() {
     var $tasks = $("#tasks");
+    var $date = $('#date');
     var $time = $('#time');
     var $days = $('#days');
 
