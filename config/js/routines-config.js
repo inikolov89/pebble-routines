@@ -16,7 +16,6 @@ function submitHandler() {
 
 function loadOptions() {
     var $tasks = $("#tasks");
-    var $date = $('#date');
     var $time = $('#time');
 
     if (localStorage.taskNames) {
@@ -26,9 +25,6 @@ function loadOptions() {
         }, this);
     }
 
-    if (localStorage.date) {
-        $date.val(localStorage.date);
-    }
     if (localStorage.time){
         $time.val(localStorage.time);
     }
@@ -44,7 +40,6 @@ function loadOptions() {
 
 function getAndStoreConfigData() {
     var $tasks = $("#tasks");
-    var $date = $('#date');
     var $time = $('#time');
     var $days = $('#days');
 
@@ -62,7 +57,6 @@ function getAndStoreConfigData() {
 
     var options = {
         taskNames: taskNames,
-        date: $date.val(),
         time: $time.val(),
         selectedDays: selectedDays,
     };
@@ -70,7 +64,6 @@ function getAndStoreConfigData() {
     // store for next time
     localStorage.taskNames = JSON.stringify(options.taskNames);
     localStorage.selectedDays = JSON.stringify(options.selectedDays);
-    localStorage.date = JSON.stringify(options.date);
     localStorage.time = JSON.stringify(options.time);
 
     console.log('Got options: ' + JSON.stringify(options));
