@@ -6,29 +6,10 @@
 
 var UI = require('ui');
 var Settings = require('settings');
+var Clock = require('clock');
+var Wakeup = require('wakeup');
+
 var tasks = [];
-
-// ---------------
-// --- READ CONFIG DATA ---
-// ---------------
-Settings.config(
-  { url: 'http://inikolov.info/pebble-routines/config/' },
-  function (e) {
-    var dict = {};
-
-    console.log('closed configurable');
-
-    if (e.options.tasks) {
-      tasks = e.options.tasks;
-    }
-
-  }
-);
-
-// ---------------
-// --- Peristence Layer ---
-// ---------------
-
 
 
 // ---------------
@@ -37,7 +18,10 @@ Settings.config(
 
 var getTasks = function () {
   var menuTasks = [];
-  var tasks = Settings.option('taskNames');
+  var tasks = [];
+  if ( Settings.option('taskNames') !== undefined) {
+    tasks = Settings.option('taskNames');
+  }
   tasks.forEach(function (taskName) {
     menuTasks.push({
       title: taskName,
@@ -48,6 +32,52 @@ var getTasks = function () {
   console.log(menuTasks);
   return menuTasks;
 };
+
+var scheduleWakeUp = function (day, time) {
+  var nextTime = Clock.weekday(day, 22, 03);
+  // Schedule a wakeup event.
+  Wakeup.schedule(
+    { time: nextTime },
+    function(e) {
+      if (e.failed) {
+        console.log('Wakeup set failed: ' + e.error);
+      } else {
+        console.log('Wakeup set! Event ID: ' + e.id);
+      }
+    }
+  );
+};
+
+
+
+// ---------------
+// --- READ CONFIG DATA ---
+// ---------------
+Settings.config(
+  { url: 'http://inikolov.info/pebble-routines/config/' },
+  function (e) {
+    console.log('closed configurable');
+    console.log(e.options);
+
+    if (e.options.tasks) {
+      tasks = e.options.tasks;
+    }
+    
+    if (e.options.selectedDays && e.options.time) {
+      e.options.selectedDays.forEach(function (day) {
+        scheduleWakeUp(day, e.options.time);
+      });
+    }
+    //TODO: repeating
+// Next Tuesday at 6:00 a.m.
+    
+
+  }
+);
+
+// ---------------
+// --- Peristence Layer ---
+// ---------------
 
 
 // ---------------
@@ -64,13 +94,18 @@ var menu = new UI.Menu({
   }]
 });
 
-// show our list
-menu.show();
-
 
 // ---------------
 // --- CONTROLLER ---
 // ---------------
+
+Wakeup.on('wakeup', function(e) {
+  console.log('Wakeup event! ' + JSON.stringify(e));
+  // show our list
+  menu.show();
+});
+
+
 menu.on('select', function (event) {
   var currentItem =  menu.item(event.sectionIndex, event.itemIndex);
   var doneStatus = 1;
