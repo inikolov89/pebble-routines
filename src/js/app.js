@@ -34,7 +34,8 @@ var getTasks = function () {
 };
 
 var scheduleWakeUp = function (day, time) {
-  var nextTime = Clock.weekday(day, 22, 03);
+  var parsedTime = time.split(':');
+  var nextTime = Clock.weekday(day, parsedTime[0], parsedTime[1]);
   // Schedule a wakeup event.
   Wakeup.schedule(
     { time: nextTime },
