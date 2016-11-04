@@ -16,9 +16,11 @@ var tasks = [];
 // --- HELPERS ---
 // ---------------
 
+// TODO: provide tasks as parameter
 var getTasks = function () {
   var menuTasks = [];
   var tasks = [];
+  // Extract check
   if ( Settings.option('taskNames') !== undefined) {
     tasks = Settings.option('taskNames');
   }
@@ -33,6 +35,7 @@ var getTasks = function () {
   return menuTasks;
 };
 
+// TODO: add tasks data as parameter
 var scheduleWakeUp = function (day, time) {
   var parsedTime = time.split(':');
   var nextTime = Clock.weekday(day, parsedTime[0], parsedTime[1]);
@@ -57,6 +60,7 @@ var scheduleWakeUp = function (day, time) {
 Settings.config(
   { url: 'http://inikolov.info/pebble-routines/config/' },
   function (e) {
+    // TODO: add debug flag 
     console.log('closed configurable');
     console.log(e.options);
 
@@ -66,20 +70,17 @@ Settings.config(
     
     if (e.options.selectedDays && e.options.time) {
       e.options.selectedDays.forEach(function (day) {
+        // TODO: add tasks as parameter
         scheduleWakeUp(day, e.options.time);
       });
     }
-    //TODO: repeating
-// Next Tuesday at 6:00 a.m.
-    
-
   }
 );
 
 // ---------------
 // --- Peristence Layer ---
 // ---------------
-
+// TODO
 
 // ---------------
 // --- UI ---
@@ -99,10 +100,12 @@ var menu = new UI.Menu({
 // ---------------
 // --- CONTROLLER ---
 // ---------------
-
 Wakeup.on('wakeup', function(e) {
   console.log('Wakeup event! ' + JSON.stringify(e));
   // show our list
+  // TODO: get tasks data from the wakeup event
+  // TODO: add the next wakeup schedule with the same data
+  // TODO: generate menu data here
   menu.show();
 });
 
